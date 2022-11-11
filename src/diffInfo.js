@@ -39,7 +39,7 @@ const getDiffInf = (data1, data2) => {
         }
       }
     })
-    console.log (result)
+    //console.log (result)
     return result; //array of obj {type, key, val}
   }
 

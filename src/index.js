@@ -14,7 +14,7 @@ const genDiff = (filepath1, filepath2) => {
   const file1 = getFileObj(readFile(getFilePath(filepath1)))
   const file2 = getFileObj(readFile(getFilePath(filepath2)))
   const diffInf = getDiffInf(file1, file2)
-  console.log (diffInf)
+  //console.log (diffInf)
 
   const getDiff = diffInf.map((diff) => {
     const typeDiff = diff.type
