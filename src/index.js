@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs';
 import _ from 'lodash';
 
-export default (path1, path2) => {
+const genDiff = (path1, path2) => {
   const result = [];
 
   const getParsedData = (path) => JSON.parse(readFileSync(path, 'utf-8'));
@@ -26,3 +26,4 @@ export default (path1, path2) => {
 
   return `{\n${result.join('\n')}\n}`;
 };
+export default genDiff
