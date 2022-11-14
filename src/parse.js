@@ -1,3 +1,6 @@
-const getFileObj = (file) => JSON.parse(file)
+import { readFileSync } from 'fs';
+import path from 'path';
 
-export default getFileObj
+export default (configPath) => {
+  return JSON.parse(readFileSync(configPath, 'utf-8'));
+};

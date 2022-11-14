@@ -1,37 +1,28 @@
-import { cwd } from 'node:process';
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { readFileSync } from 'fs';
 import _ from 'lodash';
-import getDiffInf from './diffInfo.js';
-import getFileObj from './parse.js';
 
+export default (path1, path2) => {
+  const result = [];
 
-const getFilePath = (filepath) => resolve(cwd(), filepath)
-const readFile = (path) => readFileSync(getFilePath(path), 'utf-8')
-//const getFileObj = (file) => JSON.parse(file)
+  const getParsedData = (path) => JSON.parse(readFileSync(path, 'utf-8'));
+  const data1 = getParsedData(path1);
+  const data2 = getParsedData(path2);
 
-const genDiff = (filepath1, filepath2) => {
-  const file1 = getFileObj(readFile(getFilePath(filepath1)))
-  const file2 = getFileObj(readFile(getFilePath(filepath2)))
-  const diffInf = getDiffInf(file1, file2)
-  //console.log (diffInf)
+  const getKeys = (data) => Object.keys(data);
+  _.union(getKeys(data1), getKeys(data2))
+    .sort()
+    .forEach((key) => {
+      if (!Object.hasOwn(data1, key)) {
+        result.push(`+ ${key}: ${data2[key]}`);
+      } else if (!Object.hasOwn(data2, key)) {
+        result.push(`- ${key}: ${data1[key]}`);
+      } else if (data1[key] !== data2[key]) {
+        result.push(`- ${key}: ${data1[key]}`);
+        result.push(`+ ${key}: ${data2[key]}`);
+      } else {
+        result.push(`  ${key}: ${data1[key]}`);
+      }
+    });
 
-  const getDiff = diffInf.map((diff) => {
-    const typeDiff = diff.type
-    switch (typeDiff) {
-      case 'onlyFirst':
-        return `  - ${diff.key}: ${diff.value}`
-      case 'equal':
-        return `    ${diff.key}: ${diff.value}`
-      case 'noEqual':
-        return `  - ${diff.key}: ${diff.value1} \n  + ${diff.key}: ${diff.value2}`
-      case 'onlySecond':
-        return `  + ${diff.key}: ${diff.value}`
-      default:
-        return null
-    }
-  })
-  return `{\n${getDiff.join('\n')}\n}`
-}
-
-export default genDiff;
+  return `{\n${result.join('\n')}\n}`;
+};
