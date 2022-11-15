@@ -8,13 +8,13 @@ const genDiff = (path1, path2) => {
   const data1 = getParsedData(path1);
   const data2 = getParsedData(path2);
 
-  const getKeys = (data) => Object.keys(data);
+  const getKeys = (data) => Object.prototype.keys(data);
   _.union(getKeys(data1), getKeys(data2))
     .sort()
     .forEach((key) => {
-      if (!Object.hasOwn(data1, key)) {
+      if (!Object.prototype.hasOwn(data1, key)) {
         result.push(`+ ${key}: ${data2[key]}`);
-      } else if (!Object.hasOwn(data2, key)) {
+      } else if (!Object.prototype.hasOwn(data2, key)) {
         result.push(`- ${key}: ${data1[key]}`);
       } else if (data1[key] !== data2[key]) {
         result.push(`- ${key}: ${data1[key]}`);
