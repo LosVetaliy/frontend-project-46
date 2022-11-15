@@ -8,9 +8,12 @@ parserOptions:
   sourceType: module
 rules:
   no-console: 0
-  import/extensions:
-    - error
+  # import/extensions:
+  #   - error
     # - ignorePackages
     # - no-undef
-    - js: always
-  no-underscore-dangle: [2, { "allow": ["__filename", "__dirname"] }]
+    # - js: always
+    # no-underscore-dangle: [2, { "allow": ["__filename", "__dirname"] }]
+  #  no-console: 0 
+  no-underscore-dangle: [2, { "allow": ["__filename", "__dirname"] }] 
+  import/extensions: 0
