@@ -1,6 +1,5 @@
 import { readFileSync } from 'fs';
-import path from 'path';
+// import path from 'path';
 
-export default (configPath) => {
-  return JSON.parse(readFileSync(configPath, 'utf-8'));
-};
+const parse = (configPath) => JSON.parse(readFileSync(configPath, 'utf-8'));
+export default parse;
