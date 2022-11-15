@@ -8,7 +8,6 @@ const __dirname = dirname(__filename);
 
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 
-// eslint-disable-next-line no-undef
 test('genDiff', () => {
   const patch1 = getFixturePath('file1.json');
   const patch2 = getFixturePath('file2.json');
