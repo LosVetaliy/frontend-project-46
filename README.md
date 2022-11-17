@@ -9,3 +9,5 @@
 
 ### Example of gendiff launch:
 [![asciicast](https://asciinema.org/a/y0HtJF38PV9jDWCl5mzUQtO03.svg)](https://asciinema.org/a/y0HtJF38PV9jDWCl5mzUQtO03)
+### Example of parcing yaml and yml files:
+[![asciicast](https://asciinema.org/a/YsFuwOsXGE5vo7zJYmx1rA4eo.svg)](https://asciinema.org/a/YsFuwOsXGE5vo7zJYmx1rA4eo)

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import getParsedData from './parse';
+import getParsedData from './parse.js';
 
 const genDiff = (path1, path2) => {
   const result = [];
