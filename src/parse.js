@@ -1,5 +1,11 @@
 import { readFileSync } from 'fs';
-// import path from 'path';
+import path from 'path';
+import yaml from 'js-yaml';
 
-const parse = (configPath) => JSON.parse(readFileSync(configPath, 'utf-8'));
-export default parse;
+export default (configPath) => {
+  const format = path.extname(configPath); // returns the extension of the path
+  if (format === '.json') {
+    return JSON.parse(readFileSync(configPath, 'utf-8'));
+  }
+  return yaml.load(readFileSync(configPath, 'utf8'));
+};
