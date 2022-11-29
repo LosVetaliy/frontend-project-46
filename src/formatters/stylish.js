@@ -8,8 +8,7 @@ export default (diff) => {
     const currentIndent = replacer.repeat(indentSize);
     const bracketIndent = replacer.repeat(indentSize - spacesCount);
 
-    const lines = Object
-      .entries(currentValue).sort()
+    const lines = _.sortBy(Object.entries(currentValue))
       .map(([key, val]) => {
         if (val.difference === 'changed with children') {
           return `${currentIndent}  ${key}: ${iter(val.value, depth + 2)}`;
@@ -43,7 +42,12 @@ export default (diff) => {
         }
         return `${currentIndent}  ${key}: ${val}`;
       });
-    return ['{', ...lines, `${bracketIndent}}`].join('\n');
+    return [
+      '{',
+      ...lines,
+      `${bracketIndent}}`,
+    ].join('\n');
   };
+
   return iter(diff, 1);
 };

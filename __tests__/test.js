@@ -17,6 +17,7 @@ test('genDiff', () => {
 
   const result1 = fs.readFileSync(getFixturePath('stylish.txt'), 'utf8');
   const result2 = fs.readFileSync(getFixturePath('plain.txt'), 'utf8');
+  const result3 = fs.readFileSync(getFixturePath('jsonRes.json'), 'utf8');
 
   expect(genDiff(patch1, patch2)).toEqual(result1);
   expect(genDiff(patch3, patch4)).toEqual(result1);
@@ -31,4 +32,11 @@ test('genDiff', () => {
   expect(genDiff(patch1, patch4, 'plain')).toEqual(result2);
   expect(genDiff(patch1, patch6, 'plain')).toEqual(result2);
   expect(genDiff(patch3, patch6, 'plain')).toEqual(result2);
+
+  expect(genDiff(patch1, patch2, 'json')).toEqual(result3);
+  expect(genDiff(patch3, patch4, 'json')).toEqual(result3);
+  expect(genDiff(patch5, patch6, 'json')).toEqual(result3);
+  expect(genDiff(patch1, patch4, 'json')).toEqual(result3);
+  expect(genDiff(patch1, patch6, 'json')).toEqual(result3);
+  expect(genDiff(patch3, patch6, 'json')).toEqual(result3);
 });
