@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-export default (diff) => {
+const stylish = (diff) => {
   const iter = (currentValue, depth) => {
     const replacer = ' ';
     const spacesCount = 2;
@@ -10,7 +10,7 @@ export default (diff) => {
 
     const lines = _.sortBy(Object.entries(currentValue))
       .map(([key, val]) => {
-        if (val.difference === 'changed with children') {
+        if (val.difference === 'nested') {
           return `${currentIndent}  ${key}: ${iter(val.value, depth + 2)}`;
         }
         if (val.difference === 'changed' && !_.isObject(val.value1) && !_.isObject(val.value2)) {
@@ -51,3 +51,4 @@ export default (diff) => {
 
   return iter(diff, 1);
 };
+export default stylish;

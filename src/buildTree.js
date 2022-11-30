@@ -11,7 +11,7 @@ const buildTree = (data1, data2) => {
     } if (!Object.hasOwn(data2, key)) {
       return [key, { difference: 'deleted', value: data1[key] }];
     } if (data1[key] !== data2[key] && _.isObject(data1[key]) && _.isObject(data2[key])) {
-      return [key, { difference: 'changed with children', value: buildTree(data1[key], data2[key]) }];
+      return [key, { difference: 'nested', value: buildTree(data1[key], data2[key]) }];
     } if (data1[key] !== data2[key]) {
       return [key, { difference: 'changed', value1: data1[key], value2: data2[key] }];
     }

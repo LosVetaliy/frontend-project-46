@@ -2,7 +2,7 @@ import { readFileSync } from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
 
-export default (configPath) => {
+const getParsedData = (configPath) => {
   const format = path.extname(configPath);
 
   if (format === '.json') {
@@ -10,3 +10,4 @@ export default (configPath) => {
   }
   return yaml.load(readFileSync(configPath, 'utf-8'));
 };
+export default getParsedData;

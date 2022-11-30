@@ -5,12 +5,9 @@ import json from './json.js';
 export default (diff, formatName) => {
   if (formatName === 'plain') {
     return plain(diff);
-  }
-  if (formatName === 'json') {
+  } if (formatName === 'json') {
     return json(diff);
-  }
-  if (formatName === 'stylish') {
+  } if (formatName === 'stylish') {
     return stylish(diff);
-  }
-  return `output format ${formatName} not found`;
+  } return `output format ${formatName} not found`;
 };

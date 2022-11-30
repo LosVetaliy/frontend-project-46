@@ -13,11 +13,11 @@ const helper = (value) => {
   return `${value}`;
 };
 
-export default (diff) => {
+const plain = (diff) => {
   const iter = (currentDiff, patch = '') => _.sortBy(Object
     .entries(currentDiff))
     .flatMap(([key, val]) => {
-      if (val.difference === 'changed with children') {
+      if (val.difference === 'nested') {
         return iter(val.value, `${patch}${key}.`);
       }
       if (val.difference === 'added' && !_.isObject(val.value)) {
@@ -45,3 +45,4 @@ export default (diff) => {
     }).join('\n');
   return iter(diff);
 };
+export default plain;
