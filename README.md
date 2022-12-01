@@ -9,6 +9,35 @@
 
 ### Вычислитель отличий определяет разницу между двумя файлами форматов: yaml, json. Вывод в виде plain, stylish и json.
 
+## Установка приложения
+### Перед запуском программы выполните следующие действия:
+1. Установите пакет Node.js [Node.js](https://nodejs.org/en/) и обновите его до версии не ниже 14: ```node -v```.
+2. Установите пакет npm.
+3. Клонируйте репозиторий ```git@github.com:LosVetaliy/frontend-project-46.git```.
+4. Смените директорию на frontend-project-46 и выполните команду ```make install```.
+
+## Использование приложения:
+Вы можете использовать проект как скрипт в терминале или как библиотеку в вашем JavaScript проекте. Вы можете выводить различия в трёх форматах: stylish (default), plain and json. Для получения информации введите команду ```gendiff -h```.
+```shell
+$ gendiff -h
+Usage: gendiff [options] <filepath1> <filepath2>
+Compares two configuration files and shows a difference.
+Options:
+  -V, --version          output the version number
+  -f, --format <type>    output format (choices: "stylish", "plain", "json", default: "stylish")
+  -h, --help             display help for command
+```
+
+## Рекомендуемые минимальные требования к системе:
+### Минимальные версии ОС:
+* Windows 10
+* MacOS 10.1
+* Ubuntu 16, либо удобный вам дистрибутив Linux
+### Процессор: 
+* Intel i3 / AMD Ryzen 3
+### Операционная память: 
+* от 8GB
+
 ### Запуск программы. Обращение к json файлам через относительный и абсолютный путь:
 [![asciicast](https://asciinema.org/a/y0HtJF38PV9jDWCl5mzUQtO03.svg)](https://asciinema.org/a/y0HtJF38PV9jDWCl5mzUQtO03)
 ### Сравнение файлов в формате yaml:
