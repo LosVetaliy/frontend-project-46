@@ -1,19 +1,12 @@
 import _ from 'lodash';
 
-const helper = (value) => {
-  if (typeof value === 'string') {
-    return `'${value}'`;
-  }
-  if (typeof value === 'boolean') {
-    return value === true ? 'true' : 'false';
-  }
-  if (value === null) {
-    return 'null';
-  }
-  return `${value}`;
-};
-
 const plain = (diff) => {
+  const helper = (value) => {
+    if (_.isObject(value)) {
+      return '[complex value]';
+    }
+    return _.isString(value) ? `'${value}'` : value;
+  };
   const iter = (currentDiff, patch = '') => _.sortBy(Object
     .entries(currentDiff))
     .flatMap(([key, val]) => {
