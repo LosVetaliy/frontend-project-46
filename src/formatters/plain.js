@@ -22,15 +22,6 @@ const plain = (diff) => {
       if (val.difference === 'deleted') {
         return `Property '${patch}${key}' was removed`;
       }
-      if (val.difference === 'changed' && _.isObject(val.value1) && _.isObject(val.value2)) {
-        return `Property '${patch}${key}' was updated. From [complex value] to [complex value]`;
-      }
-      if (val.difference === 'changed' && !_.isObject(val.value1) && _.isObject(val.value2)) {
-        return `Property '${patch}${key}' was updated. From ${helper(val.value1)} to [complex value]`;
-      }
-      if (val.difference === 'changed' && _.isObject(val.value1) && !_.isObject(val.value2)) {
-        return `Property '${patch}${key}' was updated. From [complex value] to ${helper(val.value2)}`;
-      }
       if (val.difference === 'changed') {
         return `Property '${patch}${key}' was updated. From ${helper(val.value1)} to ${helper(val.value2)}`;
       }
