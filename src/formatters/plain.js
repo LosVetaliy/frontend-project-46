@@ -13,27 +13,12 @@ const plain = (diff) => {
       if (val.difference === 'nested') {
         return iter(val.value, `${patch}${key}.`);
       }
-      if (val.difference === 'added' && !_.isObject(val.value)) {
+      if (val.difference === 'added') {
         return `Property '${patch}${key}' was added with value: ${helper(val.value)}`;
-      }
-      if (val.difference === 'added' && _.isObject(val.value)) {
-        return `Property '${patch}${key}' was added with value: [complex value]`;
       }
       if (val.difference === 'deleted') {
         return `Property '${patch}${key}' was removed`;
       }
-<<<<<<< HEAD
-=======
-      // if (val.difference === 'changed' && _.isObject(val.value1) && _.isObject(val.value2)) {
-      //   return `Property '${patch}${key}' was updated. From [complex value] to [complex value]`;
-      // }
-      // if (val.difference === 'changed' && !_.isObject(val.value1) && _.isObject(val.value2)) {
-      //   return `Property '${patch}${key}' was updated. From ${helper(val.value1)} to [complex value]`;
-      // }
-      // if (val.difference === 'changed' && _.isObject(val.value1) && !_.isObject(val.value2)) {
-      //   return `Property '${patch}${key}' was updated. From [complex value] to ${helper(val.value2)}`;
-      // }
->>>>>>> 94bdafc (Add changes)
       if (val.difference === 'changed') {
         return `Property '${patch}${key}' was updated. From ${helper(val.value1)} to ${helper(val.value2)}`;
       }
