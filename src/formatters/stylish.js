@@ -16,9 +16,6 @@ const stylish = (diff) => {
         if (val.difference === 'changed' && !_.isObject(val.value1) && !_.isObject(val.value2)) {
           return `${currentIndent}- ${key}: ${val.value1}\n${currentIndent}+ ${key}: ${val.value2}`;
         }
-        if (val.difference === 'changed' && !_.isObject(val.value1) && _.isObject(val.value2)) {
-          return `${currentIndent}- ${key}: ${val.value1}\n${currentIndent}+ ${key}: ${iter(val.value2, depth + 2)}`;
-        }
         if (val.difference === 'changed' && _.isObject(val.value1) && !_.isObject(val.value2)) {
           return `${currentIndent}- ${key}: ${iter(val.value1, depth + 2)}\n${currentIndent}+ ${key}: ${val.value2}`;
         }
