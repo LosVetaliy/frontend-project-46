@@ -12,6 +12,7 @@ const extensions = [
   ['json', 'json', 'stylish', 'stylish.txt'], ['yaml', 'yml', 'stylish', 'stylish.txt'], ['json', 'yaml', 'stylish', 'stylish.txt'],
   ['json', 'json', 'plain', 'plain.txt'], ['yaml', 'yml', 'plain', 'plain.txt'], ['json', 'yaml', 'plain', 'plain.txt'],
   ['json', 'json', 'json', 'jsonRes.json'], ['yaml', 'yml', 'json', 'jsonRes.json'], ['json', 'yaml', 'json', 'jsonRes.json'],
+  ['json', 'json', 'mistake', 'mistake.txt'],
 ];
 
 test.each(extensions)('file extensions and format(%s, %s, %s)', (file1Extension, file2Extension, format, resultFile) => {
