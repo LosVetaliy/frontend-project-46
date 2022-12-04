@@ -27,7 +27,7 @@ const stylish = (value, replacer = ' ', spacesCount = 1) => {
           return `${currentIndent}- ${key}: ${iter(val.value, depth + 1)}`;
         }
         if (_.isObject(val)) {
-          return `${currentIndent}  ${key}: ${iter(val, depth)}`;
+          return `${currentIndent}  ${key}: ${iter(val, depth + 1)}`;
         }
         return `${currentIndent}  ${key}: ${val}`;
       });
