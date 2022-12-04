@@ -7,36 +7,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 
-test('genDiff', () => {
-  const patch1 = getFixturePath('file1.json');
-  const patch2 = getFixturePath('file2.json');
-  const patch3 = getFixturePath('file3.yaml');
-  const patch4 = getFixturePath('file4.yaml');
-  const patch5 = getFixturePath('file5.yml');
-  const patch6 = getFixturePath('file6.yml');
+const extensions = [
+  ['json', 'json', undefined, 'stylish.txt'], ['yaml', 'yml', undefined, 'stylish.txt'], ['json', 'yaml', undefined, 'stylish.txt'],
+  ['json', 'json', 'stylish', 'stylish.txt'], ['yaml', 'yml', 'stylish', 'stylish.txt'], ['json', 'yaml', 'stylish', 'stylish.txt'],
+  ['json', 'json', 'plain', 'plain.txt'], ['yaml', 'yml', 'plain', 'plain.txt'], ['json', 'yaml', 'plain', 'plain.txt'],
+  ['json', 'json', 'json', 'jsonRes.json'], ['yaml', 'yml', 'json', 'jsonRes.json'], ['json', 'yaml', 'json', 'jsonRes.json'],
+];
 
-  const result1 = fs.readFileSync(getFixturePath('stylish.txt'), 'utf8');
-  const result2 = fs.readFileSync(getFixturePath('plain.txt'), 'utf8');
-  const result3 = fs.readFileSync(getFixturePath('jsonRes.json'), 'utf8');
+test.each(extensions)('file extensions and format(%s, %s, %s)', (file1Extension, file2Extension, format, resultFile) => {
+  const firstFile = getFixturePath(`file1.${file1Extension}`);
+  const secondFile = getFixturePath(`file2.${file2Extension}`);
+  const result = fs.readFileSync(getFixturePath(resultFile), 'utf8');
 
-  expect(genDiff(patch1, patch2)).toEqual(result1);
-  expect(genDiff(patch3, patch4)).toEqual(result1);
-  expect(genDiff(patch5, patch6)).toEqual(result1);
-  expect(genDiff(patch1, patch4)).toEqual(result1);
-  expect(genDiff(patch1, patch6)).toEqual(result1);
-  expect(genDiff(patch3, patch6)).toEqual(result1);
-
-  expect(genDiff(patch1, patch2, 'plain')).toEqual(result2);
-  expect(genDiff(patch3, patch4, 'plain')).toEqual(result2);
-  expect(genDiff(patch5, patch6, 'plain')).toEqual(result2);
-  expect(genDiff(patch1, patch4, 'plain')).toEqual(result2);
-  expect(genDiff(patch1, patch6, 'plain')).toEqual(result2);
-  expect(genDiff(patch3, patch6, 'plain')).toEqual(result2);
-
-  expect(genDiff(patch1, patch2, 'json')).toEqual(result3);
-  expect(genDiff(patch3, patch4, 'json')).toEqual(result3);
-  expect(genDiff(patch5, patch6, 'json')).toEqual(result3);
-  expect(genDiff(patch1, patch4, 'json')).toEqual(result3);
-  expect(genDiff(patch1, patch6, 'json')).toEqual(result3);
-  expect(genDiff(patch3, patch6, 'json')).toEqual(result3);
+  expect(genDiff(firstFile, secondFile, format)).toEqual(result);
 });
