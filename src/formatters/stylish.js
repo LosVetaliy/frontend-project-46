@@ -1,15 +1,17 @@
 import _ from 'lodash';
 
-const stylish = (value, replacer = ' ', spacesCount = 1) => {
+const stylish = (diff) => {
   const iter = (currentValue, depth) => {
     if (!_.isObject(currentValue)) {
       return `${currentValue}`;
     }
+    const replacer = ' ';
+    const spacesCount = 4;
     const indentSize = depth * spacesCount;
-    const currentIndent = replacer.repeat(indentSize);
+    const currentIndent = replacer.repeat(indentSize - 2);
     const bracketIndent = replacer.repeat(indentSize - spacesCount);
-    const lines = Object
-      .entries(currentValue)
+
+    const lines = _.sortBy(Object.entries(currentValue))
       .map(([key, val]) => {
         if (val.difference === 'changed') {
           return `${currentIndent}- ${key}: ${iter(val.value1, depth + 1)}\n${currentIndent}+ ${key}: ${iter(val.value2, depth + 1)}`;
@@ -38,7 +40,6 @@ const stylish = (value, replacer = ' ', spacesCount = 1) => {
     ].join('\n');
   };
 
-  return iter(value, 1);
+  return iter(diff, 1);
 };
-
 export default stylish;
